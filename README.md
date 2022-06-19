@@ -1,8 +1,6 @@
-# NHS BI Platform API Server
+# API: Wider Determinants of Health
 
-ExpressJS API for RESTful API endpoints that are deployed as a container within your VPC, to allow for secure interactions with your resources. There are also API endpoints deployed using serverless AWS technology where interaction with devices in your VPC is not required.
-
-For serverless API endpoints please review the code in: <https://github.com/morgans3/NHS_Business_Intelligence_Platform>
+API that standardizes interfaces with all the datasets used to describe the Wider Determinants of Health for use in our Place Based Intelligence app
 
 ## Pre-requisites
 
@@ -23,7 +21,6 @@ For serverless API endpoints please review the code in: <https://github.com/morg
 - JWT_SECRETKEY
 - AWS_SECRETID
 - AWS_SECRETKEY
-- SITE_URL (default `NHS BI Platform`)
 
 ## Deployment
 
@@ -40,16 +37,6 @@ An example of this configuration is as follows:
  "id": "apisettings",
  "type": "ApiSettings",
  "config": {
-  "activedirectories": [
-   {
-    "authentication": "xfyldecoast",
-    "baseDN": "dc=xfyldecoast,dc=nhs,dc=uk",
-    "bindCredentials": "ldappass",
-    "bindDN": "ldapauth",
-    "url": "ldap://IPADDRESS:PORTNUMBER"
-   },
-   ...
-  ],
   "configuration": [
    {
     "configName": "emailCredentials",
@@ -67,37 +54,18 @@ An example of this configuration is as follows:
     ]
    },
    ...
-   {
-    "configName": "adcredentials",
-    "secretName": "adcredentials",
-    "secrets": [
-     {
-      "ldapauth": "ldapauth"
-     },
-     {
-      "ldappass": "ldappass"
-     },
-     ...
-    ]
-   }
   ],
-  "serviceaccounts": [
-   "SERVICENAMEMATCHINGAWSSECRETKEY",
-   ...
-  ]
  }
 }
 ```
 
-- `activedirectories`: An array of Active Directory configurations.
 - `configuration`: An array of configuration objects in the form: `{ configName: string, secretName: string, secrets: [{ secretkey: string, secretvalue: string }] }`
-- `serviceaccount` holds and array of strings which match the keys stored in the `serviceaccounts` secret in AWS Secrets manager. This section will store all of the key-value pairs as `organisation-keys` to allow service account credentials to be used on certain API methods.
 
 The cofiguration file provides the API with knowledge of which secrets to pull from AWS Secrets Manager in order to set the correct environment variables for the API.
 
 ## Usage (API Calls)
 
-API endpoints are stored in the `routes` folder and can be viewed by navigating to <https://api.YOUR_URL_HERE/api-docs/> after being deployed.
+API endpoints are stored in the `routes` folder and can be viewed by navigating to <https://SUBDOMAIN.YOUR_URL_HERE/api-docs/> after being deployed.
 
 ## Testing Locally
 
