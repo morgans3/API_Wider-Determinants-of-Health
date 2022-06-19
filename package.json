@@ -1,0 +1,73 @@
+{
+    "name": "express-api-template",
+    "main": "server.js",
+    "version": "1.0.0",
+    "engines": {
+        "node": "~10.13",
+        "npm": "~6"
+    },
+    "scripts": {
+        "start": "node server",
+        "start:dev": "set DEV=true && node server",
+        "test": "jest tests --runInBand --detectOpenHandles --forceExit",
+        "test-coverage": "jest tests --coverage --runInBand --detectOpenHandles --forceExit",
+        "lint": "npx eslint -c .eslintrc.js --ext .js,.jsx,.ts,.tsx,.json"
+    },
+    "jest": {
+        "setupFiles": [
+            "<rootDir>/jest/setEnvVars.js"
+        ],
+        "collectCoverage": true,
+        "coverageReporters": [
+            "html"
+        ],
+        "reporters": [
+            "default",
+            [
+                "jest-junit",
+                {
+                    "outputDirectory": "test-report-directory",
+                    "outputName": "report-filename.xml"
+                }
+            ]
+        ]
+    },
+    "dependencies": {
+        "aws-sdk": "^2.540.0",
+        "body-parser": "~1.19.0",
+        "cors": "~2.8.5",
+        "diu-api-logging": "^1.0.11",
+        "diu-data-functions": "^1.2.29",
+        "express": "~4.17.1",
+        "express-rate-limit": "^6.4.0",
+        "express-winston": "^4.0.5",
+        "jsonwebtoken": "~8.5.1",
+        "luxon": "^2.4.0",
+        "morgan": "~1.9.0",
+        "passport": "^0.4.0",
+        "passport-jwt": "^4.0.0",
+        "pg": "^8.7.3",
+        "pg-types": "^3.0.1",
+        "swagger-jsdoc": "^6.0.0",
+        "swagger-ui-express": "^4.1.6",
+        "uuid": "^8.3.2",
+        "winston": "^3.3.3",
+        "winston-aws-cloudwatch": "^3.0.0",
+        "winston-mongodb": "^5.0.5"
+    },
+    "devDependencies": {
+        "@aws-sdk/client-secrets-manager": "^3.1.0",
+        "@types/jest": "^26.0.19",
+        "@types/passport": "^1.0.7",
+        "dotenv": "^8.6.0",
+        "eslint": "^8.14.0",
+        "eslint-config-standard": "^17.0.0",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-n": "^15.2.0",
+        "eslint-plugin-promise": "^6.0.0",
+        "eslint-plugin-rulesdir": "^0.2.1",
+        "jest": "^26.6.3",
+        "jest-junit": "^12.0.0",
+        "supertest": "^6.0.1"
+    }
+}
